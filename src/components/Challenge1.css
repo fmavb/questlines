@@ -1,6 +1,11 @@
 div {
     display: block;
     align-items: center;
+    font-size: large;
+    text-align: center;
+}
+input {
+    font-size: large;
 }
 .field {
     padding: 25px;
