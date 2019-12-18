@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Home from "./components/Home";
 import Challenge1 from "./components/Challenge1";
+import Challenge2 from './components/Challenge2';
 
 export default class App extends Component {
 
@@ -17,6 +18,9 @@ export default class App extends Component {
         <Switch>
           <Route path="/challenge1">
             <Challenge1 />
+          </Route>
+          <Route path="/challenge2">
+            <Challenge2 />
           </Route>
           <Route path="/">
             <Home />

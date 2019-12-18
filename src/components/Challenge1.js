@@ -13,6 +13,8 @@ export default class Challenge1 extends Component {
         this.keyToBin = this.keyToBin.bind(this);
         this.charToBin = this.charToBin.bind(this);
         this.xOR = this.xOR.bind(this);
+        this.id = this.id.bind(this);
+        this.changeChar = this.changeChar.bind(this);
     }
 
     shiftAlphabet(e) {
@@ -36,8 +38,12 @@ export default class Challenge1 extends Component {
         this.setState({ algorithm: e.target.value });
     }
 
-    decrypt(e) {
+    changeChar(e){
         const char = e.target.value;
+        this.decrypt(char);
+    }
+
+    decrypt(char) {
         let upperChar = char.toUpperCase();
         if (upperChar.match(/[A-Z]/i)) {
             let position = this.state.alphabet.indexOf(upperChar);
@@ -51,7 +57,9 @@ export default class Challenge1 extends Component {
         this.setState({binKey: this.toBinary(e.target.value) + this.toBinary(e.target.value)});
         this.xOR(this.state.binChar, this.state.binKey);
     }
-
+    id(name){
+        return document.getElementById(name);
+    }
     charToBin(e){
         const value = e.target.value;
         let binString = value.charCodeAt(0).toString(2);
@@ -97,7 +105,7 @@ export default class Challenge1 extends Component {
                         </select>
                     </div>
                     <div className="field">
-                        <label>Character:</label><input maxLength="1" onChange={this.decrypt}></input>
+                        <label>Character:</label><input maxLength="1" onChange={this.changeChar}></input>
                     </div>
                     <div className="field">
                         <label>Alphabet Rotate Key:</label><input type="number" defaultValue="0" onChange={this.shiftAlphabet}></input>
