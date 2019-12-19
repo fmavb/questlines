@@ -1,0 +1,71 @@
+p, select {
+    display: inline;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    padding: 5px;
+}
+
+button {
+    margin: 50px;
+}
+
+path {
+    fill: black;
+}
+
+.page {
+    text-align: center;
+}
+
+.element{
+    display: inline-block;
+    position: absolute;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.validate {
+    top: 70%;
+    position: absolute;
+    display: inline-block;
+    left: 0;
+    right: 0;
+}
+
+#password {
+    top: 10%;
+    right: 25%;
+    left: 0;
+}
+
+#salt {
+    top: 10%;
+    left: 25%;
+    right: 0;
+}
+
+#combined {
+    top: 30%;
+    left: 0;
+    right: 0;
+} 
+
+#algorithm {
+    top: 50%;
+    left: 0;
+    right: 0;
+}
+
+#result {
+    top: 65%;
+    left: 0;
+    right: 0;
+}
+
+#path1 {
+    stroke:black; 
+    stroke-width: 1.25px; 
+    fill: none;
+    marker-end: url(#arrow);
+}
