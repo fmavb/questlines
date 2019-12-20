@@ -63,9 +63,16 @@ path {
     right: 0;
 }
 
-#path1 {
+#key {
+    top: 50%;
+    left: 30%;
+    right: 0;
+}
+
+.line {
     stroke:black; 
     stroke-width: 1.25px; 
     fill: none;
     marker-end: url(#arrow);
+    position: absolute;
 }
