@@ -19,10 +19,9 @@ export default class App extends Component {
           <Route path="/challenge1">
             <Challenge1 />
           </Route>
-          <Route path="/challenge2">
-            <Challenge2 />
+          <Route path="/challenge2" component={Challenge2}>
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Home />
           </Route>
         </Switch>

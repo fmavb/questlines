@@ -16,9 +16,6 @@ path {
 
 .page {
     background-image: linear-gradient(blue, aqua);
-    display: flex;
-    flex-wrap: flex;
-    justify-content: center;
 }
 
 .element{
@@ -67,8 +64,8 @@ path {
 }
 
 #key {
-    top: 50%;
-    left: 30%;
+    top: 30%;
+    left: 50%;
     right: 0;
 }
 
