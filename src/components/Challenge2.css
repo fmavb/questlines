@@ -15,7 +15,10 @@ path {
 }
 
 .page {
-    text-align: center;
+    background-image: linear-gradient(blue, aqua);
+    display: flex;
+    flex-wrap: flex;
+    justify-content: center;
 }
 
 .element{
