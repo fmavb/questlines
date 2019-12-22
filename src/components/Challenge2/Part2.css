@@ -4,6 +4,7 @@ p, select {
     border-style: solid;
     border-color: black;
     padding: 5px;
+    margin: 50px;
 }
 
 button {
@@ -39,4 +40,61 @@ path {
     fill: none;
     marker-end: url(#arrow);
     position: absolute;
+}
+
+.container {
+    text-align: justify;
+    height: fit-content;
+    text-justify: distribute-all-lines;
+    -ms-text-justify: distribute-all-lines;
+    min-width: 10000px;
+}
+
+#message {
+    top: 10%;
+    right:50%;
+    left:0;
+}
+
+#random {
+    top: 10%;
+    right: 0;
+    left: 0;
+}
+
+#RSAKey{
+    top:10%;
+    left:50%;
+    right: 0;
+}
+
+#key{
+    top:25%;
+    right:0;
+    left:0;
+}
+
+#alg1 {
+    top: 35%;
+    right: 0%;
+    left: 0;
+    overflow: hidden;
+}
+
+#hashMessage{
+    top: 60%;
+    right: 50%;
+    left: 0;
+}
+
+#encMessage {
+    top: 60%;
+    right: 0;
+    left: 0;
+}
+
+#encKey {
+    top: 60%;
+    left: 50%;
+    right: 0;
 }
