@@ -4,7 +4,9 @@ p, select {
     border-style: solid;
     border-color: black;
     padding: 5px;
-    margin: 50px;
+    max-width: 200px;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 button {
@@ -22,7 +24,6 @@ path {
 .element{
     display: inline-block;
     position: absolute;
-    margin: 5px;
     border-radius: 5px;
 }
 
@@ -47,12 +48,13 @@ path {
     height: fit-content;
     text-justify: distribute-all-lines;
     -ms-text-justify: distribute-all-lines;
-    min-width: 10000px;
 }
 
 #message {
+    display: inline;
+    position: relative;
     top: 10%;
-    right:50%;
+    right:0;
     left:0;
 }
 
@@ -69,12 +71,20 @@ path {
 }
 
 #key{
+    display: inline;
     top:25%;
     right:0;
     left:0;
 }
 
-#alg1 {
+#keys {
+    position: absolute;
+    top: 10%;
+    left: 0;
+    right: 0;
+}
+
+#alg {
     top: 35%;
     right: 0%;
     left: 0;
