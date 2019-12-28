@@ -22,6 +22,7 @@ export default class Part2 extends Component {
         this.id = this.id.bind(this);
         this.initialState = this.initialState.bind(this);
         this.drawArrow2 = this.drawArrow2.bind(this);
+        this.validate = this.validate.bind(this);
     }
     static keyValues = ["des", "aes", "rsa"];
 
@@ -126,6 +127,14 @@ export default class Part2 extends Component {
         this.drawArrow2("path6", "key1", "alg1");
         this.drawArrow("path7", "key2", "alg2");
         this.drawArrow("path8", "key3", "alg3");
+        this.drawArrow("path9", "key2", "alg3");
+    }
+
+    validate(){
+        if (this.state.alg1 === "sha" && this.state.alg2 === "aes" && this.state.alg3 === "rsa"
+            && this.state.key1 === "nothing" && this.state.key2 === "random" && this.state.key3 === "rPublic"){
+                alert("Correct");
+            }
     }
 
     componentDidMount() {
@@ -147,33 +156,33 @@ export default class Part2 extends Component {
                 </div>
                     <select onChange={this.selectKey2} id="key2">
                         <option defaultValue value="nothing">Please select a key</option>
-                        <option>Recipients Private Key</option>
-                        <option>Recipients Public Key</option>
-                        <option>Sender's Public Key</option>
-                        <option>Sender's Private Key</option>
-                        <option>Sender's Password</option>
-                        <option>Randomly generated Key using a cryptographic generator</option>
+                        <option value="rPrivate">Recipients Private Key</option>
+                        <option value="rPublic">Recipients Public Key</option>
+                        <option value="sPublic">Sender's Public Key</option>
+                        <option value="sPrivate">Sender's Private Key</option>
+                        <option value="password">Sender's Password</option>
+                        <option value="random">Randomly generated Key using a cryptographic generator</option>
                     </select>
                     <select onChange={this.selectKey3} id="key3">
                         <option defaultValue value="nothing">Please select a key</option>
-                        <option>Recipients Private Key</option>
-                        <option>Recipients Public Key</option>
-                        <option>Sender's Public Key</option>
-                        <option>Sender's Private Key</option>
-                        <option>Sender's Password</option>
-                        <option>Randomly generated Key using a cryptographic generator</option>
+                        <option value="rPrivate">Recipients Private Key</option>
+                        <option value="rPublic">Recipients Public Key</option>
+                        <option value="sPublic">Sender's Public Key</option>
+                        <option value="sPrivate">Sender's Private Key</option>
+                        <option value="password">Sender's Password</option>
+                        <option value="random">Randomly generated Key using a cryptographic generator</option>
                     </select>
                 </div>
                 <div className="container">
                     <div className="element" id="alg">
                         <select onChange={this.selectKey1} id="key1">
                             <option defaultValue value="nothing">Please select a key</option>
-                            <option>Recipients Private Key</option>
-                            <option>Recipients Public Key</option>
-                            <option>Sender's Public Key</option>
-                            <option>Sender's Private Key</option>
-                            <option>Sender's Password</option>
-                            <option>Randomly generated Key using a cryptographic generator</option>
+                            <option value="rPrivate">Recipients Private Key</option>
+                            <option value="rPublic">Recipients Public Key</option>
+                            <option value="sPublic">Sender's Public Key</option>
+                            <option value="sPrivate">Sender's Private Key</option>
+                            <option value="password">Sender's Password</option>
+                            <option value="random">Randomly generated Key using a cryptographic generator</option>
                         </select>
                         <select onChange={this.selectAlg1} id="alg1">
                             <option defaultValue value="nothing">Please select an algorithm</option>
@@ -234,6 +243,7 @@ export default class Part2 extends Component {
                     <line id="path6" className="line" />
                     <line id="path7" className="line" />
                     <line id="path8" className="line" />
+                    <line id="path9" className="line" />
                 </svg>
             </div>
         );
