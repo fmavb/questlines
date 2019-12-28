@@ -10,6 +10,7 @@ import Home from "./components/Home";
 import Challenge1 from "./components/Challenge1";
 import Part1 from './components/Challenge2/Part1';
 import Part2 from './components/Challenge2/Part2';
+import Challenge3 from './components/Challenge3';
 
 export default class App extends Component {
 
@@ -22,6 +23,7 @@ export default class App extends Component {
           <Route path="/challenge1">
             <Challenge1 />
           </Route>
+          <Route path="/challenge3" component={Challenge3} />
           <Route path="/">
             <Home />
           </Route>
