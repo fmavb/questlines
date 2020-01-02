@@ -1,0 +1,11 @@
+.page {
+    display: inline;
+}
+
+.browser{
+    width: 75%;
+}
+
+.dropzone {
+    width: 25%;
+}
