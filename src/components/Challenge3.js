@@ -28,7 +28,7 @@ export default class Challenge3 extends Component {
     }
     selectFile(e) {
         console.log(e);
-        const filePath = '' + e.key;
+        const filePath = 'https://github.com/fmavb/questlines/blob/master/files/' + e.key;
         let fileViewer = <FileViewer fileType='docx' filePath={filePath} />
         this.id('file').style.display = 'block';
         this.id('page').style.opacity = 0.4;
@@ -54,6 +54,7 @@ export default class Challenge3 extends Component {
     render() {
         return (
             <div>
+                <script crossorigin></script>
             <div className="page" id="page">
                 <div className="browser">
                     <FileBrowser
