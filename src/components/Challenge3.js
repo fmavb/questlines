@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import FileBrowser, { FileRenderers, FolderRenderers, Groupers, Icons } from 'react-keyed-file-browser';
 import '../../node_modules/react-keyed-file-browser/dist/react-keyed-file-browser.css';
 import "./Challenge3.css";
-import { Document, Page } from 'react-pdf';
 
 export default class Challenge3 extends Component {
     constructor(props) {
@@ -28,12 +27,9 @@ export default class Challenge3 extends Component {
     }
     selectFile(e) {
         console.log(e);
-        const filePath = '../../' + e.key;
-        let fileViewer = <Document file={patient1}><Page pageNumber={1} /></Document>;
         this.id('file').style.display = 'block';
         this.id('page').style.opacity = 0.4;
         this.id('page').style.pointerEvents = 'none';
-        this.setState({ fileViewer: fileViewer, fileOpen: true, fileName: e.key });
     }
 
     id(id) {
