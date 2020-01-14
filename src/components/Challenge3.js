@@ -4,6 +4,8 @@ import '../../node_modules/react-keyed-file-browser/dist/react-keyed-file-browse
 import "./Challenge3.css";
 import Patient1 from './Challenge3/Patient1';
 import RandomGenerator from './Challenge3/RandomGenerator';
+import MCQ from './Challenge3/MCQ';
+import { unmountComponentAtNode } from 'react-dom';
 
 export default class Challenge3 extends Component {
     constructor(props) {
@@ -11,6 +13,9 @@ export default class Challenge3 extends Component {
         this.selectFile = this.selectFile.bind(this);
         this.id = this.id.bind(this);
         this.closeViewer = this.closeViewer.bind(this);
+        this.processFile = this.processFile.bind(this);
+        this.addPoints = this.addPoints.bind(this);
+        this.filesToBeFound = ['patient1/record.docx', 'random_key_generator'];
         this.state = {
             files: [
                 {
@@ -32,7 +37,10 @@ export default class Challenge3 extends Component {
             ],
             fileName: "",
             fileViewer: null,
-            fileOpen: false
+            fileOpen: false,
+            found: 0,
+            solution: [],
+            points: 0,
         };
     }
     selectFile(e) {
@@ -45,9 +53,9 @@ export default class Challenge3 extends Component {
         if (e.key === "patient1/record.docx"){
             viewFile = <Patient1></Patient1>;
         } else if (e.key === "patient1/record_encrypted"){
-            viewFile = <h3>File encrypted</h3>;
+            viewFile = <h3>Cannot read file</h3>;
         } else if (e.key === "patient2/record_encrypted"){
-            viewFile = <h3>File encrypted</h3>;
+            viewFile = <h3>Cannot read file</h3>;
         } else if (e.key === "random_key_generator"){
             viewFile = <RandomGenerator />
         }
@@ -63,6 +71,36 @@ export default class Challenge3 extends Component {
         this.id('page').style.opacity = 1;
         this.id('page').style.pointerEvents = 'auto';
         this.setState({ fileOpen: false });
+    }
+
+    processFile(){
+        if (this.filesToBeFound.includes(this.state.fileName)){
+            this.setState({mcq: <MCQ id="mcqComponent" question={this.state.fileName} close={this.closeViewer} points={this.addPoints}/>});
+            const msq = this.id('mcq');
+            msq.style.display = "block";
+            this.id('file').style.display = 'block';
+            this.id('file').style.opacity = 0.1;
+            this.id('file').style.pointerEvents = 'none';
+            let solution = this.state.solution;
+            solution.push(this.state.fileName);
+            let newFiles = [];
+            for (let i = 0; i < this.filesToBeFound.length; i++){
+                if (this.filesToBeFound[i] !== this.state.fileName){
+                    newFiles.push(this.filesToBeFound[i]);
+                }
+            }
+            this.filesToBeFound = newFiles;
+            let found = this.state.found;
+            this.setState({solution: solution, found: found+1});
+        }
+    }
+
+    addPoints(points){
+        let currentPoints = this.state.points;
+        this.setState({points: currentPoints+points});
+        const unmount = this.id("mcqComponent");
+        console.log(unmount);
+        unmountComponentAtNode(unmount);
     }
 
     componentDidMount() {
@@ -83,16 +121,21 @@ export default class Challenge3 extends Component {
                     </div>
                     <div className="dropzone">
                         <h1>Incriminating files</h1>
-                        <ul>
-                            <li>List1</li>
-                        </ul>
+                        <h3>{this.state.found} out of 4 files found</h3>
+                        <h3>{this.state.points} points</h3>
+                        {this.state.solution.map((el, idx) => {
+                        return (<ul>{el}</ul>)
+                        })}
                     </div>
                 </div>
                 <div className="fileViewer" id="file">
                     {this.state.fileName}
                     {this.state.fileViewer}
-                    <button>Add to list</button>
+                    <button onClick={this.processFile}>Add to list</button>
                     <button onClick={this.closeViewer}>Close</button>
+                </div>
+                <div className="mcq" id="mcq">
+                    {this.state.mcq}
                 </div>
             </div>
         );

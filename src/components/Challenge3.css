@@ -11,7 +11,7 @@
 .dropzone {
     width: 25%;
 }
-.fileViewer {
+.fileViewer .mcq {
     display: block;
     text-align: center;
     min-width: 100%;
@@ -21,3 +21,4 @@
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
+

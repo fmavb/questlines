@@ -1,0 +1,14 @@
+.mcq {
+    text-align: center;
+}
+
+.answer {
+    border-radius: 2px;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    display: block;
+    position: relative;
+    width: 50%;
+    padding: 5px;
+}
