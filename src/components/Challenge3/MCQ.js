@@ -59,13 +59,22 @@ export default class MCQ extends Component {
             this.id('file').style.opacity = 1;
             this.id('file').style.pointerEvents = 'auto';
             this.props.close();
-        } else {
+        } else if (this.state.selected === "") {
+            alert("Please select an option.");
+        }
+        else {
             this.points -= 5;
             alert("Incorrect!");
         }
+        this.id(this.state.selected).style.backgroundColor = "white";
         this.setState({selected: ""});
     }
 
+    componentDidUpdate(prevProps){
+        if (prevProps.question !== this.props.question){
+            this.setState({currentQuestion: this.props.question, questions: this.questions[this.props.question]});
+        }
+    }
 
     render(){
         return (

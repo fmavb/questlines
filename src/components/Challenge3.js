@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import FileBrowser, { FileRenderers, FolderRenderers, Groupers, Icons } from 'react-keyed-file-browser';
+import FileBrowser, { FileRenderers, FolderRenderers, Groupers } from 'react-keyed-file-browser';
 import '../../node_modules/react-keyed-file-browser/dist/react-keyed-file-browser.css';
 import "./Challenge3.css";
 import Patient1 from './Challenge3/Patient1';
 import RandomGenerator from './Challenge3/RandomGenerator';
 import MCQ from './Challenge3/MCQ';
-import { unmountComponentAtNode } from 'react-dom';
 
 export default class Challenge3 extends Component {
     constructor(props) {
@@ -50,16 +49,16 @@ export default class Challenge3 extends Component {
         this.id('page').style.pointerEvents = 'none';
         let viewFile;
         let fileName = e.key;
-        if (e.key === "patient1/record.docx"){
+        if (e.key === "patient1/record.docx") {
             viewFile = <Patient1></Patient1>;
-        } else if (e.key === "patient1/record_encrypted"){
+        } else if (e.key === "patient1/record_encrypted") {
             viewFile = <h3>Cannot read file</h3>;
-        } else if (e.key === "patient2/record_encrypted"){
+        } else if (e.key === "patient2/record_encrypted") {
             viewFile = <h3>Cannot read file</h3>;
-        } else if (e.key === "random_key_generator"){
+        } else if (e.key === "random_key_generator") {
             viewFile = <RandomGenerator />
         }
-        this.setState({fileViewer: viewFile, fileName: fileName});
+        this.setState({ fileViewer: viewFile, fileName: fileName });
     }
 
     id(id) {
@@ -73,9 +72,9 @@ export default class Challenge3 extends Component {
         this.setState({ fileOpen: false });
     }
 
-    processFile(){
-        if (this.filesToBeFound.includes(this.state.fileName)){
-            this.setState({mcq: <MCQ id="mcqComponent" question={this.state.fileName} close={this.closeViewer} points={this.addPoints}/>});
+    processFile() {
+        if (this.filesToBeFound.includes(this.state.fileName)) {
+            this.setState({ mcq: <MCQ id="mcqComponent" question={this.state.fileName} close={this.closeViewer} points={this.addPoints} /> });
             const msq = this.id('mcq');
             msq.style.display = "block";
             this.id('file').style.display = 'block';
@@ -84,23 +83,20 @@ export default class Challenge3 extends Component {
             let solution = this.state.solution;
             solution.push(this.state.fileName);
             let newFiles = [];
-            for (let i = 0; i < this.filesToBeFound.length; i++){
-                if (this.filesToBeFound[i] !== this.state.fileName){
+            for (let i = 0; i < this.filesToBeFound.length; i++) {
+                if (this.filesToBeFound[i] !== this.state.fileName) {
                     newFiles.push(this.filesToBeFound[i]);
                 }
             }
             this.filesToBeFound = newFiles;
             let found = this.state.found;
-            this.setState({solution: solution, found: found+1});
+            this.setState({ solution: solution, found: found + 1 });
         }
     }
 
-    addPoints(points){
+    addPoints(points) {
         let currentPoints = this.state.points;
-        this.setState({points: currentPoints+points});
-        const unmount = this.id("mcqComponent");
-        console.log(unmount);
-        unmountComponentAtNode(unmount);
+        this.setState({ points: currentPoints + points });
     }
 
     componentDidMount() {
@@ -111,30 +107,35 @@ export default class Challenge3 extends Component {
         return (
             <div>
                 <h1>Challenge 3</h1>
-                <div className="page" id="page">
-                    <div className="browser">
-                        <FileBrowser
-                            icons={Icons.FontAwesome(4)}
-                            files={this.state.files}
-                            onSelectFile={this.selectFile}
-                        />
+                <div>
+                    <div className="page" id="page">
+                        <div className="browser">
+                            <FileBrowser
+                                icons={Icons.FontAwesome(4)}
+                                files={this.state.files}
+                                onSelectFile={this.selectFile}
+                                detailRenderer={()=>"null"}
+                            />
+                        </div>
+                        <div className="dropzone">
+                            <h1>Incriminating files</h1>
+                            <h3>{this.state.found} out of 4 files found</h3>
+                            <h3>{this.state.points} points</h3>
+                            <ul>
+                                {this.state.solution.map((el, idx) => {
+                                    return (<li>{el}</li>);
+                                })}
+                            </ul>
+                        </div>
                     </div>
-                    <div className="dropzone">
-                        <h1>Incriminating files</h1>
-                        <h3>{this.state.found} out of 4 files found</h3>
-                        <h3>{this.state.points} points</h3>
-                        {this.state.solution.map((el, idx) => {
-                        return (<ul>{el}</ul>)
-                        })}
+                    <div className="fileViewer" id="file">
+                        {this.state.fileName}
+                        {this.state.fileViewer}
+                        <button onClick={this.processFile}>Add to list</button>
+                        <button onClick={this.closeViewer}>Close</button>
                     </div>
                 </div>
-                <div className="fileViewer" id="file">
-                    {this.state.fileName}
-                    {this.state.fileViewer}
-                    <button onClick={this.processFile}>Add to list</button>
-                    <button onClick={this.closeViewer}>Close</button>
-                </div>
-                <div className="mcq" id="mcq">
+                <div className="fileViewer" id="mcq">
                     {this.state.mcq}
                 </div>
             </div>
