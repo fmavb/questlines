@@ -16,10 +16,16 @@ export default class MCQ extends Component {
                 <div className="answer" id="answer3" onClick={this.select}>The plaintext was not deleted after encryption</div>
                 <div className="answer" id="answer4" onClick={this.select}>I don't know</div>
             </div>,
-            'random_key_generator': <div>
+            'random_key_generator': <div className="mcq">
                 <div className="answer" id="answer1" onClick={this.select}>The plaintext contains sensitive information</div>
                 <div className="answer" id="answer2" onClick={this.select}>The generator does not generate numbers randomly</div>
                 <div className="answer" id="answer3" onClick={this.select}></div>
+                <div className="answer" id="answer4" onClick={this.select}>I don't know</div>
+            </div>,
+            'patient2/record.docx': <div className="mcq">
+                <div className="answer" id="answer1" onClick={this.select}>The encryption key was not stored securely</div>
+                <div className="answer" id="answer2" onClick={this.select}>The key used is weak</div>
+                <div className="answer" id="answer3" onClick={this.select}>The plaintext was not deleted after encryption</div>
                 <div className="answer" id="answer4" onClick={this.select}>I don't know</div>
             </div>,
         };
@@ -28,6 +34,7 @@ export default class MCQ extends Component {
         this.answer = {
             'patient1/record.docx': "answer3",
             random_key_generator: "answer2",
+            'patient2/record.docx': "answer1",
         };
     }
 
@@ -61,9 +68,10 @@ export default class MCQ extends Component {
             this.props.close();
         } else if (this.state.selected === "") {
             alert("Please select an option.");
-        }
-        else {
-            this.points -= 5;
+        } else {
+            if (this.points > 0) {
+                this.points -= 5;
+            }
             alert("Incorrect!");
         }
         this.id(this.state.selected).style.backgroundColor = "white";

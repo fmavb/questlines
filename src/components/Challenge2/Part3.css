@@ -1,0 +1,40 @@
+p, select {
+    display: inline;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    padding: 5px;
+    max-width: 200px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.element{
+    display: inline-block;
+    position: absolute;
+    border-radius: 5px;
+}
+
+#row1 {
+    top: 10%;
+    right: 0;
+    left: 0;
+}
+
+#row2 {
+    top: 25%;
+    right: 0;
+    left: 0;
+}
+
+#row3 {
+    top: 40%;
+    right: 0;
+    left: 0;
+}
+
+#row4 {
+    top: 55%;
+    right: 0;
+    left: 0;
+}

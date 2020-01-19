@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import FileBrowser, { FileRenderers, FolderRenderers, Groupers } from 'react-keyed-file-browser';
+import FileBrowser from 'react-keyed-file-browser';
 import '../../node_modules/react-keyed-file-browser/dist/react-keyed-file-browser.css';
 import "./Challenge3.css";
 import Patient1 from './Challenge3/Patient1';
+import Patient2 from './Challenge3/Patient2';
 import RandomGenerator from './Challenge3/RandomGenerator';
 import MCQ from './Challenge3/MCQ';
+import Decryptor from './Challenge3/Decryptor';
 
 export default class Challenge3 extends Component {
     constructor(props) {
@@ -14,7 +16,9 @@ export default class Challenge3 extends Component {
         this.closeViewer = this.closeViewer.bind(this);
         this.processFile = this.processFile.bind(this);
         this.addPoints = this.addPoints.bind(this);
-        this.filesToBeFound = ['patient1/record.docx', 'random_key_generator'];
+        this.patient2 = this.patient2.bind(this);
+        this.filesToBeFound = ['patient1/record.docx', 'random_key_generator', 'patient2/record.docx'];
+        document.title = "Challenge 3";
         this.state = {
             files: [
                 {
@@ -30,7 +34,15 @@ export default class Challenge3 extends Component {
                     size: 1.5 * 1024 * 1024,
                 },
                 {
+                    key: 'patient2/key.txt',
+                    size: 1024,
+                },
+                {
                     key: 'random_key_generator',
+                    size: 1.5 * 1024 * 1024,
+                },
+                {
+                    key: 'decryptor',
                     size: 1.5 * 1024 * 1024,
                 }
             ],
@@ -50,13 +62,21 @@ export default class Challenge3 extends Component {
         let viewFile;
         let fileName = e.key;
         if (e.key === "patient1/record.docx") {
-            viewFile = <Patient1></Patient1>;
+            viewFile = <Patient1 />;
         } else if (e.key === "patient1/record_encrypted") {
             viewFile = <h3>Cannot read file</h3>;
         } else if (e.key === "patient2/record_encrypted") {
             viewFile = <h3>Cannot read file</h3>;
         } else if (e.key === "random_key_generator") {
-            viewFile = <RandomGenerator />
+            viewFile = <RandomGenerator />;
+        } else if (e.key === "decryptor"){
+            viewFile = <Decryptor file={this.patient2}/>;
+        } else if (e.key === 'patient2/key.txt'){
+            viewFile = <div className="key">
+                <p>0x67566B597033733676397924423F4528</p>
+            </div>
+        } else if (e.key === 'patient2/record.docx'){
+            viewFile = <Patient2 />;
         }
         this.setState({ fileViewer: viewFile, fileName: fileName });
     }
@@ -99,6 +119,12 @@ export default class Challenge3 extends Component {
         this.setState({ points: currentPoints + points });
     }
 
+    patient2(){
+        let files = this.state.files;
+        files.push({key: 'patient2/record.docx', size: 1.5*1024*1024});
+        this.setState({files:files});
+    }
+
     componentDidMount() {
         this.id("file").style.display = "none";
     }
@@ -111,10 +137,9 @@ export default class Challenge3 extends Component {
                     <div className="page" id="page">
                         <div className="browser">
                             <FileBrowser
-                                icons={Icons.FontAwesome(4)}
                                 files={this.state.files}
                                 onSelectFile={this.selectFile}
-                                detailRenderer={()=>"null"}
+                                detailRenderer={()=>""}
                             />
                         </div>
                         <div className="dropzone">

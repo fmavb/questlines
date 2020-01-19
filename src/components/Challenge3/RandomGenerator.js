@@ -3,18 +3,16 @@ import React, {Component} from 'react';
 export default class RandomGenerator extends Component{
     constructor(props){
         super(props);
-        this.startKey = "0x7133743677397A24432646294A404E60";
-        this.state = {key: this.startKey.toString()};
+        this.keys = ['0x743777217A25432646294A404E635266', '0x597133743677397A244326452948404D',
+        '0x67566B59703373367639792442264528', '0x4E645267556B58703273357638792F42', '0x294A404E635266556A586E3272357538'];
+        this.state = {key: this.keys[0]};
         this.generateKey = this.generateKey.bind(this);
+        this.keyChoice = 0;
     }
 
     generateKey(){
-        let currentKey = this.state.key;
-        let lastIndex = currentKey.charCodeAt(33);
-        lastIndex++;
-        lastIndex = String.fromCharCode(lastIndex);
-        currentKey = currentKey.substring(0, 33) + lastIndex;
-        this.setState({key: currentKey.toString()});
+        this.keyChoice = this.keyChoice > 3 ? 0 : this.keyChoice+=1;
+        this.setState({key: this.keys[this.keyChoice]});
     }
 
     render(){

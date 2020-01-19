@@ -1,3 +1,11 @@
+li {
+    padding: 5px;
+}
+
+.key {
+    padding: 10px;
+}
+
 .page {
     display: inline-flex;
     min-width: 100%;

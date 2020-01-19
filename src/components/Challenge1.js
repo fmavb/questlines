@@ -15,6 +15,7 @@ export default class Challenge1 extends Component {
         this.xOR = this.xOR.bind(this);
         this.id = this.id.bind(this);
         this.changeChar = this.changeChar.bind(this);
+        document.title = "Challenge 1";
     }
 
     shiftAlphabet(e) {

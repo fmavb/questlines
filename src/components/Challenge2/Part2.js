@@ -96,9 +96,9 @@ export default class Part2 extends Component {
         const x2 = leftTo + parseFloat(rectTo.width)/2;
         const y2 = topTo + parseFloat(rectTo.height)/2;
         this.id(arrow).setAttribute("x1", x1);
-        this.id(arrow).setAttribute("y1", y1 + 20);
+        this.id(arrow).setAttribute("y1", y1 + 0);
         this.id(arrow).setAttribute("x2", x2);
-        this.id(arrow).setAttribute("y2", y2 - 20);
+        this.id(arrow).setAttribute("y2", y2 - 40);
     }
 
     drawArrow2(arrow, from, to) {
@@ -113,9 +113,9 @@ export default class Part2 extends Component {
         const x2 = leftTo;
         const y2 = topTo + rectTo.height/2;
         this.id(arrow).setAttribute("x1", x1 + 5);
-        this.id(arrow).setAttribute("y1", y1);
+        this.id(arrow).setAttribute("y1", y1 - 15);
         this.id(arrow).setAttribute("x2", x2 - 10);
-        this.id(arrow).setAttribute("y2", y2);
+        this.id(arrow).setAttribute("y2", y2 - 15);
     }
 
     initialState(){
@@ -145,6 +145,7 @@ export default class Part2 extends Component {
         this.id("path6").style.display = "none";
         this.id("path7").style.display = "none";
         this.id("path8").style.display = "none";
+        this.id("path9").style.display = "none";
     }
 
     render() {
