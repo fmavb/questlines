@@ -51,6 +51,7 @@ export default class Part3 extends Component {
         if (this.state.key1 === "rPrivate" && this.state.alg1 === "rsa" && this.state.alg2 === "aes"){
             alert("Correct!");
         }
+        this.props.history.push('/challenge2/part3');
     }
 
     id(id){
