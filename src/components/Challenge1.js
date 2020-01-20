@@ -15,6 +15,7 @@ export default class Challenge1 extends Component {
         this.xOR = this.xOR.bind(this);
         this.id = this.id.bind(this);
         this.changeChar = this.changeChar.bind(this);
+        this.close = this.close.bind(this);
         document.title = "Challenge 1";
     }
 
@@ -91,6 +92,10 @@ export default class Challenge1 extends Component {
         this.setState({decryptedChar: String.fromCharCode(result)});
     }
 
+    close(e){
+        window.close();
+    }
+
     render() {
         if (this.state.algorithm === "caesar") {
             return (
@@ -121,7 +126,7 @@ export default class Challenge1 extends Component {
                         <label>Decrypted Message:</label><input></input>
                     </div>
                     <div>
-                        <button>Close</button>
+                        <button onClick={this.close}>Close</button>
                         <button>Validate</button>
                     </div>
                 </div>
@@ -161,7 +166,7 @@ export default class Challenge1 extends Component {
                         <label>Decrypted Message:</label><input></input>
                     </div>
                     <div>
-                        <button>Close</button>
+                        <button onClick={this.close}>Close</button>
                         <button>Validate</button>
                     </div>
                 </div>

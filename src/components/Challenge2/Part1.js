@@ -29,6 +29,7 @@ export default class Part1 extends Component{
             alert("This solution is not correct. The problem with this solution is that symmetric cryptography is reversible. \
 Therefore, if an attacker steals the cipher from the database, he will be able to figure out the password by brute forcing all possible keys. You get 0 points");
         }
+        this.props.history.push('/challenge2/part2');
     }
 
     id(element){
@@ -57,7 +58,7 @@ Therefore, if an attacker steals the cipher from the database, he will be able t
         this.drawArrow("path2", "salt", "combined");
         this.drawArrow("path3", "combined", "algorithm");
         this.drawArrow("path4", "algorithm", "result");
-        this.drawArrow("path5", "key", "algorithm");
+        //this.drawArrow("path5", "key", "algorithm");
     }
 
     render(){
@@ -88,14 +89,6 @@ Therefore, if an attacker steals the cipher from the database, he will be able t
                         <option value="bcrypt">Hash Function (bcrypt)</option>
                     </select>
                 </div>
-                <div className="element" id="key">
-                    <select>
-                        <option defaultValue value="nothing">Please select a key to use with the algorithm</option>
-                        <option value="des">Username</option>
-                        <option value="aes">Password</option>
-                        <option value="rsa">Random Number</option>
-                    </select>
-                </div>
                 <div className="element" id="result">
                     <p>Result</p>
                 </div>
@@ -114,7 +107,6 @@ Therefore, if an attacker steals the cipher from the database, he will be able t
                     <line id="path2" className="line" />
                     <line id="path3" className="line" />
                     <line id="path4" className="line" />
-                    <line id="path5" className="line" />
                 </svg>
             </div>
         );
