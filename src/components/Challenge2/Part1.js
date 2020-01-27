@@ -28,6 +28,18 @@ export default class Part1 extends Component{
         } else if (this.state.algorithm === "des" || this.state.algorithm === "aes") {
             alert("This solution is not correct. The problem with this solution is that symmetric cryptography is reversible. \
 Therefore, if an attacker steals the cipher from the database, he will be able to figure out the password by brute forcing all possible keys. You get 0 points");
+        } else if (this.state.algorithm === "rsa"){
+            alert("This solution is not correct. This solution requires using a public and private key to encrypt and decrypt. \
+Also, public key cryptography requires the messages to be of fixed length");
+        } else if (this.state.algorithm === "sha"){
+            alert("Hash algorithms is the correct choice here. However, bcrypt would be an even better solution because \
+it is a slow algorithm which makes brute forcing time consuming");
+        } else if (this.state.algorithm === "md5"){
+            alert("Hash algorithms is the correct choice here. However, MD5 is considered to be unsafe and should not be used for hashing");
+        } else if (this.state.salt === "nothing" && this.state.algorithm === "bcrypt"){
+            alert("The algorithm choice is correct here. However, if only the password is hashed, similar passwords will have the same hash allowing the attacker to see the user having the same password");
+        } else if (this.state.salt === "username" && this.state.algorithm === "bcrypt"){
+            alert("The algorithm choice is correct here. However, using the username as a salt allows the attacker to predict the next hash if the user updates his password");
         }
         this.props.history.push('/challenge2/part2');
     }
