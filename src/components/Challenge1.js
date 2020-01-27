@@ -5,7 +5,9 @@ export default class Challenge1 extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { cipher: "ABCD", alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ", shiftedAlphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ", selected: "caesar", algorithm: "caesar", binKey:"00000000", binChar:"00000000" };
+        this.state = { cipher: "TLLA TL HA AOL JVMMLL ZOVW. JYFWAV QLKP.", alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ", 
+            shiftedAlphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ", selected: "caesar", algorithm: "caesar", binKey:"00000000", 
+            binChar:"00000000", char: "", message: "" };
         this.shiftAlphabet = this.shiftAlphabet.bind(this);
         this.selector = this.selector.bind(this);
         this.decrypt = this.decrypt.bind(this);
@@ -16,6 +18,9 @@ export default class Challenge1 extends Component {
         this.id = this.id.bind(this);
         this.changeChar = this.changeChar.bind(this);
         this.close = this.close.bind(this);
+        this.message = this.message.bind(this);
+        this.validate = this.validate.bind(this);
+        this.answer = "MEET ME AT THE COFFEE SHOP. CRYPTO JEDI."
         document.title = "Challenge 1";
     }
 
@@ -42,14 +47,16 @@ export default class Challenge1 extends Component {
 
     changeChar(e){
         const char = e.target.value;
-        this.decrypt(char);
+        this.setState({char: char});
     }
 
-    decrypt(char) {
+    decrypt() {
+        const char = this.state.char;
         let upperChar = char.toUpperCase();
         if (upperChar.match(/[A-Z]/i)) {
             let position = this.state.alphabet.indexOf(upperChar);
-            this.setState({ decryptedChar: this.state.shiftedAlphabet[position] });
+            const decryptedChar = this.state.shiftedAlphabet[position];
+            this.setState({decryptedChar: decryptedChar});
         } else {
             return;
         }
@@ -96,12 +103,27 @@ export default class Challenge1 extends Component {
         window.close();
     }
 
+    message(e){
+        const message = e.target.value;
+        this.setState({message: message});
+    }
+
+    validate(){
+        let message = this.state.message;
+        message = message.toUpperCase();
+        if (message === this.answer){
+            alert("Correct! You can close the challenge!");
+        } else {
+            alert("Incorrect! Please try again.")
+        }
+    }
+
     render() {
         if (this.state.algorithm === "caesar") {
             return (
                 <div>
                     <div className="field">
-                        <label>Cipher:</label><input disabled value={this.state.cipher}></input>
+                        <label>Cipher:</label><input disabled value={this.state.cipher} id="cipher" size="50"></input>
                     </div>
                     <div className="field">
                         <label>Algorithm Selector:</label>
@@ -115,6 +137,7 @@ export default class Challenge1 extends Component {
                     </div>
                     <div className="field">
                         <label>Alphabet Rotate Key:</label><input type="number" defaultValue="0" onChange={this.shiftAlphabet}></input>
+                        <button onClick={this.decrypt}>Decrypt</button>
                     </div>
                     <div className="field">
                         <label>Shifted Alphabet:</label><input disabled value={this.state.shiftedAlphabet} id="shiftedAlphabet" size="50"></input>
@@ -123,11 +146,10 @@ export default class Challenge1 extends Component {
                         <label>Encrypted Character:</label><input disabled value={this.state.decryptedChar}></input>
                     </div>
                     <div className="field">
-                        <label>Decrypted Message:</label><input></input>
+                        <label>Decrypted Message:</label><input onChange={this.message} size="50"></input>
                     </div>
                     <div>
-                        <button onClick={this.close}>Close</button>
-                        <button>Validate</button>
+                        <button onClick={this.validate}>Validate</button>
                     </div>
                 </div>
             );
@@ -135,7 +157,7 @@ export default class Challenge1 extends Component {
             return (
                 <div>
                     <div className="field">
-                        <label>Cipher:</label><input disabled value={this.state.cipher}></input>
+                        <label>Cipher:</label><input disabled value={this.state.cipher} id="cipher" size="50"></input>
                     </div>
                     <div className="field">
                         <label>Algorithm Selector:</label>
@@ -152,6 +174,7 @@ export default class Challenge1 extends Component {
                     </div>
                     <div className="field">
                         <label>Key:</label><input type="number" defaultValue="0" min="0" max="15" onChange={this.keyToBin}></input>
+                        <button onClick={this.decrypt}>Decrypt</button>
                     </div>
                     <div className="field">
                         <label>Key in binary (repeated twice):</label><input disabled value={this.state.binKey}></input>
@@ -163,10 +186,9 @@ export default class Challenge1 extends Component {
                         <label>Resulting character:</label><input disabled value={this.state.decryptedChar}></input>
                     </div>
                     <div className="field">
-                        <label>Decrypted Message:</label><input></input>
+                        <label>Decrypted Message:</label><input size="50"></input>
                     </div>
                     <div>
-                        <button onClick={this.close}>Close</button>
                         <button>Validate</button>
                     </div>
                 </div>

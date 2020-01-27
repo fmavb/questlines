@@ -10,3 +10,7 @@ input {
 .field {
     padding: 25px;
 }
+
+#cipher{
+    min-width: fit-content;
+}
