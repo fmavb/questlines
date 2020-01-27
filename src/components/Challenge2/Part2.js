@@ -133,7 +133,8 @@ export default class Part2 extends Component {
     validate(){
         if (this.state.alg1 === "sha" && this.state.alg2 === "aes" && this.state.alg3 === "rsa"
             && this.state.key1 === "nothing" && this.state.key2 === "random" && this.state.key3 === "rPublic"){
-                alert("Correct");
+                alert("Correct! You get 100 points");
+                this.props.history.push("/challenge2/part3");
             }
     }
 
