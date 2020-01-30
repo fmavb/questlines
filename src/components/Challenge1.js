@@ -64,7 +64,6 @@ export default class Challenge1 extends Component {
 
     keyToBin(e) {
         this.setState({binKey: this.toBinary(e.target.value) + this.toBinary(e.target.value)});
-        this.xOR(this.state.binChar, this.state.binKey);
     }
     id(name){
         return document.getElementById(name);
@@ -76,7 +75,6 @@ export default class Challenge1 extends Component {
             binString = "0" + binString;
         }
         this.setState({binChar: binString});
-        this.xOR(this.state.binChar, this.state.binKey);
     }
 
     toBinary(value){
@@ -87,9 +85,9 @@ export default class Challenge1 extends Component {
         }
         return value;
     }
-    xOR(char, key){
-        char = parseInt(char, 2);
-        key = parseInt(key, 2);
+    xOR(){
+        const char = parseInt(this.state.binChar,2)
+        const key = parseInt(this.state.binKey, 2);
         const result = char ^ key;
         let outputString = result.toString(2);
         for (let i = outputString.length; i < 4; i++){
@@ -174,7 +172,7 @@ export default class Challenge1 extends Component {
                     </div>
                     <div className="field">
                         <label>Key:</label><input type="number" defaultValue="0" min="0" max="15" onChange={this.keyToBin}></input>
-                        <button onClick={this.decrypt}>Decrypt</button>
+                        <button onClick={this.xOR}>Decrypt</button>
                     </div>
                     <div className="field">
                         <label>Key in binary (repeated twice):</label><input disabled value={this.state.binKey}></input>
