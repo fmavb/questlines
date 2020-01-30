@@ -187,7 +187,7 @@ export default class Challenge1 extends Component {
                         <label>Decrypted Message:</label><input size="50"></input>
                     </div>
                     <div>
-                        <button>Validate</button>
+                        <button onClick={this.validate}>Validate</button>
                     </div>
                 </div>
             );
