@@ -21,6 +21,7 @@ export default class Challenge1 extends Component {
         this.message = this.message.bind(this);
         this.validate = this.validate.bind(this);
         this.answer = "MEET ME AT THE COFFEE SHOP. CRYPTO JEDI."
+        this.points = 100;
         document.title = "Challenge 1";
     }
 
@@ -108,11 +109,18 @@ export default class Challenge1 extends Component {
 
     validate(){
         let message = this.state.message;
+        if (message === ""){
+            alert("Please enter the decrypted message in the box provided");
+            return;
+        }
         message = message.toUpperCase();
         if (message === this.answer){
-            alert("Correct! You can close the challenge!");
+            alert("Correct! You got " + this.points + " points. You can close the challenge!");
         } else {
-            alert("Incorrect! Please try again.")
+            alert("Incorrect! Please try again.");
+            if (this.points > 0){
+                this.points -= 25;
+            }
         }
     }
 
