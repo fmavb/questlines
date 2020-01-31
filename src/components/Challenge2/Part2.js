@@ -23,6 +23,54 @@ export default class Part2 extends Component {
         this.initialState = this.initialState.bind(this);
         this.drawArrow2 = this.drawArrow2.bind(this);
         this.validate = this.validate.bind(this);
+        this.points = 100;
+        this.alg1 = {
+            "none": "This does not result in a hashed message.",
+            "md5": "MD5 results in a hashed message, however this algorithm is outdated, so this is not an optimal choice.",
+            "sha": "SHA-2 results in a hashed message.",
+            "bcrypt": "bcrypt results in a hashed message, however this algorithm is slow, so this is not an optimal choice.",
+            "rsa": "RSA does not result in a hashed message.",
+            "des": "DES does not result in a hashed message.",
+            "aes": "AES does not result in a hashed message.",
+        };
+        this.alg2 = {
+            "none": "This does not result in an encrypted message. Hashes cannot be decrypted.",
+            "md5": "MD5 does not result in an encrypted message. Hashes cannot be decrypted.",
+            "sha": "SHA-2 does not result in an encrypted message. Hashes cannot be decrypted.",
+            "bcrypt": "bcrypt does not result in an encrypted message. Hashes cannot be decrypted.",
+            "rsa": "RSA results in an encrypted message, however RSA takes fixed size plaintext, and messages usually do not have a fixed length",
+            "des": "DES results in an encrypted message, however DES is outdated and vulnerable, so this is not an optimal choice",
+            "aes": "AES results in an encrypted message.",
+        };
+        this.alg3 = {
+            "none": "This does not result in an encrypted key.",
+            "md5": "MD5 does not result in an encrypted key.",
+            "sha": "SHA-2 does not result in an encrypted key.",
+            "bcrypt": "bcrypt does not result in an encrypted key.",
+            "rsa": "RSA results in an encrypted key. The choice of algorithm is correct.",
+            "des": "DES results in an encrypted key, however this solution requires to store the key that is used to encrypt the message key.",
+            "aes": "DES results in an encrypted key, however this solution requires to store the key that is used to encrypt the message key.",
+        };
+        this.key2 = {
+            "nothing": "Please choose a key for the second algorithm.",
+            "rPrivate": "Private and public keys are used for asymmetric (or public key) cryptography.",
+            "rPublic": "Private and public keys are used for asymmetric (or public key) cryptography.",
+            "sPublic": "Private and public keys are used for asymmetric (or public key) cryptography.",
+            "sPrivate": "Private and public keys are used for asymmetric (or public key) cryptography.",
+            "password": "Using the sender's password is not correct. If the password is compromised, all messages encrypted with it are also compromised. " + 
+            "Moreover, symmetric cryptography requires keys of fixed size, and password have usually different lengths.",
+            "random": "This is the correct key choice.",
+        };
+        this.key3 = {
+            "nothing": "Please choose a key for the third algorithm.",
+            "rPrivate": "The private key is used to decrypt the key, not to encrypt it. Also, this is the key that is kept secret.",
+            "rPublic": "This is the correct key choice.",
+            "sPublic": "In asymmetric cryptography, the keys are encrypted with the receiver's public key, not the sender's.",
+            "sPrivate": "In asymmetric cryptography, the keys are encrypted with the receiver's public key, not the sender's.",
+            "password": "Using the sender's password is not correct. If the password is compromised, all messages encrypted with it are also compromised. " + 
+            "Moreover, asymmetric cryptography requires keys of fixed size, and password have usually different lengths.",
+            "random": "Randomly generated keys are not used for asymmetric cryptography.",
+        };
     }
     static keyValues = ["des", "aes", "rsa"];
 
@@ -47,6 +95,7 @@ export default class Part2 extends Component {
         } else {
             document.getElementById("key1").style.display = "none";
             this.id("path6").style.display = "none";
+            this.setState({key1: "nothing"});
         }
         this.initialState();
         this.setState({ alg1: value });
@@ -133,9 +182,24 @@ export default class Part2 extends Component {
     validate(){
         if (this.state.alg1 === "sha" && this.state.alg2 === "aes" && this.state.alg3 === "rsa"
             && this.state.key1 === "nothing" && this.state.key2 === "random" && this.state.key3 === "rPublic"){
-                alert("Correct! You get 100 points");
+                alert("Correct! You get " + this.points + " points");
                 this.props.history.push("/challenge2/part3");
             }
+        else {
+            if (this.state.alg1 === "sha" && this.state.alg2 === "aes" && this.state.alg3 === "rsa"){
+                alert("The choice of algorithms are correct. However, " + this.key2[this.state.key2] + " " +
+                    this.key3[this.state.key3]);
+                if (this.points > 0){
+                    this.points -= 5;
+                }
+            } else {
+                alert(this.alg1[this.state.alg1] + " " + this.alg2[this.state.alg2] + " " + 
+                    this.alg3[this.state.alg3]);
+                if (this.points > 0){
+                    this.points -= 25;
+                }
+            }
+        }
     }
 
     componentDidMount() {
