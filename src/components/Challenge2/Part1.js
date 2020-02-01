@@ -9,7 +9,7 @@ export default class Part1 extends Component{
         this.selectSalt = this.selectSalt.bind(this);
         this.selectAlgorithm = this.selectAlgorithm.bind(this);
         this.validate = this.validate.bind(this);
-        this.state = {salt: "nothing", algorithm:"nothing"};
+        this.state = {salt: "nothing", algorithm: "nothing"};
     }
 
     selectSalt(e){
@@ -60,9 +60,9 @@ it is a slow algorithm which makes brute forcing time consuming");
         const x2 = leftTo + (parseFloat(getComputedStyle(this.id(to), null).width.replace("px", "")))/2;
         const y2 = topTo + (parseFloat(getComputedStyle(this.id(to), null).height.replace("px", "")))/2;
         this.id(arrow).setAttribute("x1", x1);
-        this.id(arrow).setAttribute("y1", y1+15);
+        this.id(arrow).setAttribute("y1", y1-100);
         this.id(arrow).setAttribute("x2", x2);
-        this.id(arrow).setAttribute("y2", y2-20);
+        this.id(arrow).setAttribute("y2", y2-140);
     }
 
     componentDidMount(){
@@ -75,6 +75,11 @@ it is a slow algorithm which makes brute forcing time consuming");
 
     render(){
         return(
+            <div className="challenge">
+                <div style={{position: "relative"}}>
+                <h1>Sign In / Sign Up</h1>
+                Create a secure way to authenticate users.
+                </div>
             <div className="page">
                 <div className="element" id="password">
                     <p>Password</p>
@@ -120,6 +125,7 @@ it is a slow algorithm which makes brute forcing time consuming");
                     <line id="path3" className="line" />
                     <line id="path4" className="line" />
                 </svg>
+            </div>
             </div>
         );
     }

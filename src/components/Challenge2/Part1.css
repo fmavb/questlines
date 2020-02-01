@@ -6,6 +6,11 @@ p, select {
     padding: 5px;
 }
 
+.challenge{
+    display: block;
+    position: absolute;
+}
+
 button {
     margin: 50px;
 }
