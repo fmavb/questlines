@@ -39,8 +39,8 @@ export default class Part2 extends Component {
             "md5": "MD5 does not result in an encrypted message. Hashes cannot be decrypted.",
             "sha": "SHA-2 does not result in an encrypted message. Hashes cannot be decrypted.",
             "bcrypt": "bcrypt does not result in an encrypted message. Hashes cannot be decrypted.",
-            "rsa": "RSA results in an encrypted message, however RSA takes fixed size plaintext, and messages usually do not have a fixed length",
-            "des": "DES results in an encrypted message, however DES is outdated and vulnerable, so this is not an optimal choice",
+            "rsa": "RSA results in an encrypted message, however RSA takes fixed size plaintext, and messages usually do not have a fixed length.",
+            "des": "DES results in an encrypted message, however DES is outdated and vulnerable, so this is not an optimal choice.",
             "aes": "AES results in an encrypted message.",
         };
         this.alg3 = {
@@ -66,8 +66,8 @@ export default class Part2 extends Component {
             "nothing": "Please choose a key for the third algorithm.",
             "rPrivate": "The private key is used to decrypt the key, not to encrypt it. Also, this is the key that is kept secret.",
             "rPublic": "This is the correct key choice.",
-            "sPublic": "In asymmetric cryptography, the keys are encrypted with the receiver's public key, not the sender's.",
-            "sPrivate": "In asymmetric cryptography, the keys are encrypted with the receiver's public key, not the sender's.",
+            "sPublic": "In asymmetric cryptography, the keys are encrypted and decrypted with the receiver's public key, not the sender's.",
+            "sPrivate": "In asymmetric cryptography, the keys are encrypted and decrypted with the receiver's public key, not the sender's.",
             "password": "Using the sender's password is not correct. If the password is compromised, all messages encrypted with it are also compromised. " + 
             "Moreover, asymmetric cryptography requires keys of fixed size, and password have usually different lengths.",
             "random": "Randomly generated keys are not used for asymmetric cryptography.",

@@ -4,6 +4,7 @@ import './Part3.css';
 export default class Part3 extends Component {
     constructor(props){
         super(props);
+        document.title = "Challenge 2 - Part 3";
         this.state = {
             alg1: "nothing",
             alg2: "nothing",
@@ -20,6 +21,35 @@ export default class Part3 extends Component {
         this.selectAlg2 = this.selectAlg2.bind(this);
         this.selectKey1 = this.selectKey1.bind(this);
         this.validate = this.validate.bind(this);
+        this.points = 100;
+        this.alg1 = {
+            "none": "This does not result in a decrypted message.",
+            "md5": "MD5 does not result in a decrypted message.",
+            "sha": "SHA-2 does not result in a decrypted message.",
+            "bcrypt": "bcrypt does not result in a decrypted message.",
+            "rsa": "RSA results in a decrypted message, however RSA takes fixed size plaintext, and messages usually do not have a fixed length.",
+            "des": "DES results in a decrypted message, however DES is outdated and vulnerable, so this is not an optimal choice.",
+            "aes": "AES results in a decrypted message.",
+        };
+        this.alg2 = {
+            "none": "This does not result in a decrypted key.",
+            "md5": "MD5 does not result in a decrypted key.",
+            "sha": "SHA-2 does not result in a decrypted key.",
+            "bcrypt": "bcrypt does not result in a decrypted key.",
+            "rsa": "RSA results in a decrypted key.",
+            "des": "DES results in a decrypted key, however DES is outdated and vulnerable, also this is not a secure way to communicate a key, so this is not an optimal choice.",
+            "aes": "AES results in a decrypted key, however this is not a secure way to communicate a key, so this is not an optimal choice..",
+        };
+        this.key1 = {
+            "nothing": "Please choose a key.",
+            "rPrivate": "This is the correct choice.",
+            "rPublic": "This is the correct choice. Also, this is the key that is kept secret.",
+            "sPublic": "In asymmetric cryptography, the keys are encrypted and decrypted with the receiver's keys, not the sender's.",
+            "sPrivate": "In asymmetric cryptography, the keys are encrypted and decrypted with the receiver's keys, not the sender's.",
+            "password": "Using the sender's password is not correct. If the password is compromised, all messages encrypted with it are also compromised. " + 
+            "Moreover, asymmetric cryptography requires keys of fixed size, and password have usually different lengths.",
+            "random": "Randomly generated keys are not used for asymmetric cryptography.",
+        };
     }
     
     static keyValues = ["des", "aes", "rsa"];
@@ -50,8 +80,14 @@ export default class Part3 extends Component {
     validate(){
         if (this.state.key1 === "rPrivate" && this.state.alg1 === "rsa" && this.state.alg2 === "aes"){
             alert("Correct!");
+            this.props.history.push('/challenge2/part3');
+        } else {
+            if (this.state.alg1 === "sha" && this.state.alg2 === "aes" && this.state.alg3 === "rsa"){
+
+            } else {
+                alert(this.alg1[this.state.alg1] + " " + this.alg2[this.state.alg2]);
+            }
         }
-        this.props.history.push('/challenge2/part3');
     }
 
     id(id){
@@ -59,7 +95,6 @@ export default class Part3 extends Component {
     }
 
     drawArrow(arrow, from, to) {
-        console.log(this.id(from));
         const rectFrom = this.id(from).getBoundingClientRect();
         const leftFrom = rectFrom.left + document.body.scrollLeft;
         const topFrom = rectFrom.top + document.body.scrollTop;
