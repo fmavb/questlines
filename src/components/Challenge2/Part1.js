@@ -10,6 +10,7 @@ export default class Part1 extends Component{
         this.selectAlgorithm = this.selectAlgorithm.bind(this);
         this.validate = this.validate.bind(this);
         this.state = {salt: "nothing", algorithm: "nothing"};
+        document.title = "Challenge 2 - Part 1";
     }
 
     selectSalt(e){
