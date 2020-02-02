@@ -42,7 +42,7 @@ it is a slow algorithm which makes brute forcing time consuming");
         } else if (this.state.salt === "username" && this.state.algorithm === "bcrypt"){
             alert("The algorithm choice is correct here. However, using the username as a salt allows the attacker to predict the next hash if the user updates his password");
         }
-        this.props.history.push('/challenge2/part2');
+        this.props.history.push('/challenge2/part1/explanation');
     }
 
     id(element){
