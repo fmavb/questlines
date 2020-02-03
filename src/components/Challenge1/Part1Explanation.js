@@ -40,7 +40,9 @@ export default class Part1Explanation extends Component{
                 You'll have a quick overview below:
                 <ul>
                     <li>MD5: MD5 is probably the most famous one. However, it is no longer considered safe today</li>
-                    <li>SHA-2: </li>
+                    <li>SHA-2: SHA-2 is the currently used hash function for most purposes. It has different variants
+                        which generate hashes of different lengths.
+                    </li>
                     <li>bcrypt: bcrypt is a hash function that was designed for passwords. It is a slow function to prevent 
                         brute forcing (trying every possibility)</li>
                 </ul>
