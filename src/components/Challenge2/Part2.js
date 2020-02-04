@@ -39,7 +39,7 @@ export default class Part2 extends Component {
             "md5": "MD5 does not result in an encrypted message. Hashes cannot be decrypted.",
             "sha": "SHA-2 does not result in an encrypted message. Hashes cannot be decrypted.",
             "bcrypt": "bcrypt does not result in an encrypted message. Hashes cannot be decrypted.",
-            "rsa": "RSA results in an encrypted message, however RSA takes fixed size plaintext, and messages usually do not have a fixed length.",
+            "rsa": "RSA results in an encrypted message, however RSA is much slower than symmetric encryption, so this is not an optimal choice.",
             "des": "DES results in an encrypted message, however DES is outdated and vulnerable, so this is not an optimal choice.",
             "aes": "AES results in an encrypted message.",
         };
@@ -188,17 +188,20 @@ export default class Part2 extends Component {
         if (this.state.alg1 === "sha" && this.state.alg2 === "aes" && this.state.alg3 === "rsa"
             && this.state.key1 === "nothing" && this.state.key2 === "random" && this.state.key3 === "rPublic"){
                 alert("Correct! You get " + this.points + " points");
-                this.props.history.push("/challenge2/part3");
+                this.props.history.push("/challenge2/part2/explanation");
             }
+        else if (this.state.alg1 === "nothing" || this.state.alg2 === "nothing" || this.state.alg3 === "nothing"){
+            alert("Please make a selection.");
+        }
         else {
             if (this.state.alg1 === "sha" && this.state.alg2 === "aes" && this.state.alg3 === "rsa"){
-                alert("The choice of algorithms are correct. However, " + this.key2[this.state.key2] + " " +
+                alert("The choice of algorithms are correct. However, " + this.key2[this.state.key2] + "\n" +
                     this.key3[this.state.key3]);
                 if (this.points > 0){
                     this.points -= 5;
                 }
             } else {
-                alert(this.alg1[this.state.alg1] + " " + this.alg2[this.state.alg2] + " " + 
+                alert(this.alg1[this.state.alg1] + "\n" + this.alg2[this.state.alg2] + "\n" + 
                     this.alg3[this.state.alg3]);
                 if (this.points > 0){
                     this.points -= 25;
@@ -223,6 +226,7 @@ export default class Part2 extends Component {
             <div className="challenge">
                 <h1>Encrypt and Send a Message</h1>
                 Encrypt the message, and its encryption key so that it can be sent securely.
+                You can assume that each user has a private and public key.
             <div className="page">
                 <div id="keys">
                 <div className="element" id="message">
