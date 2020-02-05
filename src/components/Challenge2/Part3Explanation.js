@@ -5,6 +5,11 @@ export default class Part3Explanation extends Component{
     constructor(props){
         super(props);
         document.title = "Challenge 2 - Part 3 - Explanation";
+        this.back = this.back.bind(this);
+    }
+
+    back(){
+        this.props.history.push("/challenge2/part3");
     }
 
     render(){
