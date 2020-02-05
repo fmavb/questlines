@@ -22,7 +22,7 @@ export default class Part1Explanation extends Component{
         <div>
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" 
             integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"></link>
-            <h1>Sign In / Sign Up Explanation</h1>
+            <h1>Sign In / Sign Up: Explanation</h1>
             <div className="container">
                 In this challenge, you are asked to graphically represent how an application would perform sign in and sign up.
                 Since storing passwords in plaintext is a very bad idea, we need to find a way to store them securely,

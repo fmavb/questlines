@@ -23,7 +23,7 @@ export default class Part2Explanation extends Component {
             <div>
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" 
             integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"></link>
-                <h1>Encrypt and Send a Message Explanation</h1>
+                <h1>Encrypt and Send a Message: Explanation</h1>
                 <div className="container">
                     In this challenge, you are asked to represent graphically how you would establish a secure communication
                     by encrypting a message.
@@ -50,11 +50,25 @@ export default class Part2Explanation extends Component {
                     <br />
                     <br />
                     To send the key for the message, you should use asymmetric encryption. 
-                    Asymmetric cryptography has two keys:
+                    Asymmetric cryptography has two keys, these two keys work in pair, and are used to decrypt and encrypt data:
                     <ul>
-                        <li>Public key: </li>
-                        <li>Private key: </li>
+                        <li>Public key: The public key is the key that the owner makes public. Using this key,
+                            people can send messages to that person in such way that only the person owning the private key
+                            decrypt the message. 
+                            Also, the public key can be used to validate a message sent by the owner of the private key.
+                        </li>
+                        <li>Private key: The private key is the key that the owner keeps private.
+                            The private key is used to decrypt a message encrypted 
+                            with its corresponding public key. The private key can also be used to 
+                            encrypt a message to show the people who have the corresponding public key that 
+                            the message has been sent by its owner.</li>
                     </ul>
+                    Therefore, you should use the receiver's public key to encrypt the key used to encrypt the message.
+                    <br />
+                    <br />
+                    Finally, you can optionally hash the message.
+                    This can be done to check when the message has been decrypted whether it has been correctly decrypted.
+                    The receiver hashes the message he decrypted, and compares it with the message in the database.
                     <br />
                     <br />
                     <b>DISCLAIMER:</b> You should avoid writing your own encryption algorithms or manipulating them at all cost. 
