@@ -57,7 +57,7 @@ export default class Part2Explanation extends Component {
                             decrypt the message. 
                             Also, the public key can be used to validate a message sent by the owner of the private key.
                         </li>
-                        <li>Private key: The private key is the key that the owner keeps private.
+                        <li>Private key: The private key is the key that the owner keeps secret.
                             The private key is used to decrypt a message encrypted 
                             with its corresponding public key. The private key can also be used to 
                             encrypt a message to show the people who have the corresponding public key that 

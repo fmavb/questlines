@@ -133,6 +133,7 @@ export default class Challenge3 extends Component {
         return (
             <div>
                 <h1>Challenge 3</h1>
+                Find 4 files that show that the company has been using poor cryptography practices.
                 <div>
                     <div className="page" id="page">
                         <div className="browser">
