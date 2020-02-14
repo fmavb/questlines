@@ -7,6 +7,7 @@ import Patient2 from './Challenge3/Patient2';
 import RandomGenerator from './Challenge3/RandomGenerator';
 import MCQ from './Challenge3/MCQ';
 import Decryptor from './Challenge3/Decryptor';
+import EncryptionGuidelines from './Challenge3/EncryptionGuidelines';
 
 export default class Challenge3 extends Component {
     constructor(props) {
@@ -17,7 +18,7 @@ export default class Challenge3 extends Component {
         this.processFile = this.processFile.bind(this);
         this.addPoints = this.addPoints.bind(this);
         this.patient2 = this.patient2.bind(this);
-        this.filesToBeFound = ['patient1/record.docx', 'random_key_generator', 'patient2/record.docx'];
+        this.filesToBeFound = ['patient1/record.docx', 'random_key_generator', 'patient2/record.docx', 'encryptionGuidelines.pdf'];
         document.title = "Challenge 3";
         this.state = {
             files: [
@@ -44,6 +45,10 @@ export default class Challenge3 extends Component {
                 {
                     key: 'decryptor',
                     size: 1.5 * 1024 * 1024,
+                },
+                {
+                    key: 'encryptionGuidelines.pdf',
+                    size: 1.0 * 1024 * 1024,
                 }
             ],
             fileName: "",
@@ -77,6 +82,8 @@ export default class Challenge3 extends Component {
             </div>
         } else if (e.key === 'patient2/record.docx'){
             viewFile = <Patient2 />;
+        } else if (e.key === 'encryptionGuidelines.pdf'){
+            viewFile = <EncryptionGuidelines />
         }
         this.setState({ fileViewer: viewFile, fileName: fileName });
     }
@@ -109,14 +116,17 @@ export default class Challenge3 extends Component {
                 }
             }
             this.filesToBeFound = newFiles;
-            let found = this.state.found;
-            this.setState({ solution: solution, found: found + 1 });
+            const found = this.state.found + 1;
+            this.setState({ solution: solution, found: found });
         }
     }
 
     addPoints(points) {
         let currentPoints = this.state.points;
         this.setState({ points: currentPoints + points });
+        if (this.state.found === 4){
+            alert("Congratulations! You have completed the cryptography questlines! You got " + this.state.points + " points for challenge 3");
+        }
     }
 
     patient2(){

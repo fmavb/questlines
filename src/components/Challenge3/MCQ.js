@@ -19,7 +19,7 @@ export default class MCQ extends Component {
             'random_key_generator': <div className="mcq">
                 <div className="answer" id="answer1" onClick={this.select}>The plaintext contains sensitive information</div>
                 <div className="answer" id="answer2" onClick={this.select}>The generator does not generate numbers randomly</div>
-                <div className="answer" id="answer3" onClick={this.select}></div>
+                <div className="answer" id="answer3" onClick={this.select}>The generator generates some non-alphanumeric keys</div>
                 <div className="answer" id="answer4" onClick={this.select}>I don't know</div>
             </div>,
             'patient2/record.docx': <div className="mcq">
@@ -28,6 +28,12 @@ export default class MCQ extends Component {
                 <div className="answer" id="answer3" onClick={this.select}>The plaintext was not deleted after encryption</div>
                 <div className="answer" id="answer4" onClick={this.select}>I don't know</div>
             </div>,
+            'encryptionGuidelines.pdf': <div className="mcq">
+            <div className="answer" id="answer1" onClick={this.select}>The key used is weak</div>
+            <div className="answer" id="answer2" onClick={this.select}>The encryption algorithm is DES which is no longer consider secure</div>
+            <div className="answer" id="answer3" onClick={this.select}>The plaintext was not deleted after encryption</div>
+            <div className="answer" id="answer4" onClick={this.select}>I don't know</div>
+        </div>,
         };
         this.state = {currentQuestion: this.props.question};
         this.state = {questions: this.questions[this.props.question], selected: ""};
@@ -35,6 +41,7 @@ export default class MCQ extends Component {
             'patient1/record.docx': "answer3",
             random_key_generator: "answer2",
             'patient2/record.docx': "answer1",
+            'encryptionGuidelines.pdf': "answer2",
         };
     }
 
