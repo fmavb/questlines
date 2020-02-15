@@ -106,9 +106,9 @@ export default class Part3 extends Component {
         const x2 = leftTo + parseFloat(rectTo.width)/2;
         const y2 = topTo + parseFloat(rectTo.height)/2;
         this.id(arrow).setAttribute("x1", x1);
-        this.id(arrow).setAttribute("y1", y1 - 90);
+        this.id(arrow).setAttribute("y1", y1 + 15);
         this.id(arrow).setAttribute("x2", x2);
-        this.id(arrow).setAttribute("y2", y2 - 150);
+        this.id(arrow).setAttribute("y2", y2 - 25);
     }
 
     drawArrow2(arrow, from, to) {
@@ -123,9 +123,9 @@ export default class Part3 extends Component {
         const x2 = leftTo;
         const y2 = topTo + rectTo.height/2;
         this.id(arrow).setAttribute("x1", x1 - 210);
-        this.id(arrow).setAttribute("y1", y1 - 110);
+        this.id(arrow).setAttribute("y1", y1 - 0);
         this.id(arrow).setAttribute("x2", x2 + 15);
-        this.id(arrow).setAttribute("y2", y2 - 110);
+        this.id(arrow).setAttribute("y2", y2 - 0);
     }
 
     initialState(){
@@ -146,8 +146,6 @@ export default class Part3 extends Component {
     render(){
         return (
             <div className="challenge">
-                <h1>Decrypting the Message</h1>
-                Decrypt the message and the key you sent in the previous part of this challenge.
             <div className="page">
                 <div className="element" id="row1">
                     <p id="encMessage">Encrypted Message</p>

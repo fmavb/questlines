@@ -16,6 +16,9 @@ import Part3 from './components/Challenge2/Part3';
 import Part1Explanation from './components/Challenge2/Part1Explanation';
 import Part2Explanation from './components/Challenge2/Part2Explanation';
 import Part3Explanation from './components/Challenge2/Part3Explanation';
+import Part1Begin from './components/Challenge2/Part1Begin';
+import Part2Begin from './components/Challenge2/Part2Begin';
+import Part3Begin from './components/Challenge2/Part3Begin';
 
 export default class App extends Component {
 
@@ -23,8 +26,11 @@ export default class App extends Component {
     return (
       <Router>
         <Switch>
+          <Route path="/challenge2/part1/start" component={Part1Begin} />
           <Route path="/challenge2/part1/explanation" component={Part1Explanation} />
+          <Route path="/challenge2/part2/start" component={Part2Begin} />
           <Route path="/challenge2/part2/explanation" component={Part2Explanation} />
+          <Route path="/challenge2/part3/start" component={Part3Begin} />
           <Route path="/challenge2/part3/explanation" component={Part3Explanation} />
           <Route path="/challenge2/part1" component={Part1} />
           <Route path="/challenge2/part2" component={Part2} />

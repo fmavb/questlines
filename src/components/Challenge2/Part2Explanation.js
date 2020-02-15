@@ -15,7 +15,7 @@ export default class Part2Explanation extends Component {
     }
 
     next(){
-        this.props.history.push("/challenge2/part3");
+        this.props.history.push("/challenge2/part3/start");
     }
 
     render(){

@@ -150,9 +150,9 @@ export default class Part2 extends Component {
         const x2 = leftTo + parseFloat(rectTo.width)/2;
         const y2 = topTo + parseFloat(rectTo.height)/2;
         this.id(arrow).setAttribute("x1", x1);
-        this.id(arrow).setAttribute("y1", y1 - 110);
+        this.id(arrow).setAttribute("y1", y1 + 0);
         this.id(arrow).setAttribute("x2", x2);
-        this.id(arrow).setAttribute("y2", y2 - 150);
+        this.id(arrow).setAttribute("y2", y2 - 35);
     }
 
     drawArrow2(arrow, from, to) {
@@ -167,9 +167,9 @@ export default class Part2 extends Component {
         const x2 = leftTo;
         const y2 = topTo + rectTo.height/2;
         this.id(arrow).setAttribute("x1", x1 + 5);
-        this.id(arrow).setAttribute("y1", y1 - 125);
+        this.id(arrow).setAttribute("y1", y1 - 15);
         this.id(arrow).setAttribute("x2", x2 - 10);
-        this.id(arrow).setAttribute("y2", y2 - 125);
+        this.id(arrow).setAttribute("y2", y2 - 15);
     }
 
     initialState(){
@@ -224,9 +224,6 @@ export default class Part2 extends Component {
     render() {
         return (
             <div className="challenge">
-                <h1>Encrypt and Send a Message</h1>
-                Encrypt the message, and its encryption key so that it can be sent securely.
-                You can assume that each user has a private and public key.
             <div className="page">
                 <div id="keys">
                 <div className="element" id="message">

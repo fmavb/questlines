@@ -52,18 +52,18 @@ it is a slow algorithm which makes brute forcing time consuming");
     drawArrow(arrow, from, to) {
         const rectFrom = this.id(from).getBoundingClientRect();
         const leftFrom = rectFrom.left + document.body.scrollLeft;
-        const topFrom = rectFrom.top + document.body.scrollTop;
+        const topFrom = rectFrom.top + document.body.clientTop;
         const rectTo = this.id(to).getBoundingClientRect();
         const leftTo = rectTo.left + document.body.scrollLeft;
-        const topTo = rectTo.top + document.body.scrollTop;
+        const topTo = rectTo.top + document.body.clientTop;
         const x1 = leftFrom + (parseFloat(getComputedStyle(this.id(from), null).width.replace("px", "")))/2;
         const y1 = topFrom + (parseFloat(getComputedStyle(this.id(from), null).height.replace("px", "")))/2;
         const x2 = leftTo + (parseFloat(getComputedStyle(this.id(to), null).width.replace("px", "")))/2;
         const y2 = topTo + (parseFloat(getComputedStyle(this.id(to), null).height.replace("px", "")))/2;
         this.id(arrow).setAttribute("x1", x1);
-        this.id(arrow).setAttribute("y1", y1-100);
+        this.id(arrow).setAttribute("y1", y1 + 15);
         this.id(arrow).setAttribute("x2", x2);
-        this.id(arrow).setAttribute("y2", y2-140);
+        this.id(arrow).setAttribute("y2", y2-15);
     }
 
     componentDidMount(){
@@ -77,10 +77,6 @@ it is a slow algorithm which makes brute forcing time consuming");
     render(){
         return(
             <div className="challenge">
-                <div style={{position: "relative"}}>
-                <h1>Sign In / Sign Up</h1>
-                Create a secure way to authenticate users.
-                </div>
             <div className="page">
                 <div className="element" id="password">
                     <p>Password</p>
@@ -115,7 +111,7 @@ it is a slow algorithm which makes brute forcing time consuming");
                     <button>Close</button>
                     <button onClick={this.validate}>Validate</button>
                 </div>
-                <svg width={document.body.clientWidth} height="1080">
+                <svg>
                     <defs>
                         <marker markerWidth="13" markerHeight="13" id="arrow" orient="auto" refX="2" refY="6">
                             <path d="M2,1 L2,10 L10,6 L2,2"/>

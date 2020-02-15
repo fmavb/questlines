@@ -6,6 +6,11 @@ p, select {
     padding: 5px;
 }
 
+svg {
+    height: 100vh;
+    width: 100vw;
+}
+
 .challenge{
     display: block;
     position: absolute;
