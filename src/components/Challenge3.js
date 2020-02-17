@@ -126,6 +126,10 @@ export default class Challenge3 extends Component {
         this.setState({ points: currentPoints + points });
         if (this.state.found === 4){
             alert("Congratulations! You have completed the cryptography questlines! You got " + this.state.points + " points for challenge 3");
+            let request = new XMLHttpRequest();
+            request.open("POST", "https://0xs5mk4j9d.execute-api.eu-west-2.amazonaws.com/dev/challenge3");
+            request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            request.send(JSON.stringify({"score": this.points}));
         }
     }
 
