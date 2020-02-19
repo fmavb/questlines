@@ -187,11 +187,11 @@ export default class Part2 extends Component {
     validate(){
         if (this.state.alg1 === "sha" && this.state.alg2 === "aes" && this.state.alg3 === "rsa"
             && this.state.key1 === "nothing" && this.state.key2 === "random" && this.state.key3 === "rPublic"){
-                alert("Correct! You get " + this.points + " points");
-                let request = new XMLHttpRequest();
+                const request = new XMLHttpRequest();
                 request.open("POST", "https://0xs5mk4j9d.execute-api.eu-west-2.amazonaws.com/dev/part2");
                 request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                 request.send(JSON.stringify({"score": this.points}));
+                alert("Correct! You get " + this.points + " points");
                 this.props.history.push("/challenge2/part2/explanation");
             }
         else if (this.state.alg1 === "nothing" || this.state.alg2 === "nothing" || this.state.alg3 === "nothing"){

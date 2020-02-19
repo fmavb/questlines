@@ -25,11 +25,11 @@ export default class Part1 extends Component{
 
     validate(){
         if (this.state.salt === "salt" && this.state.algorithm === "bcrypt"){
-            alert("This is the correct solution! You get 100 points!");
-            let request = new XMLHttpRequest();
+            const request = new XMLHttpRequest();
             request.open("POST", "https://0xs5mk4j9d.execute-api.eu-west-2.amazonaws.com/dev/part1");
             request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             request.send(JSON.stringify({"score": this.points}));
+            alert("This is the correct solution! You get 100 points!");
         } else if (this.state.algorithm === "des" || this.state.algorithm === "aes") {
             alert("This solution is not correct. The problem with this solution is that symmetric cryptography is reversible. \
 Therefore, if an attacker steals the cipher from the database, he will be able to figure out the password by brute forcing all possible keys. You get 0 points");
