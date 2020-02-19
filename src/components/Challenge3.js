@@ -56,8 +56,8 @@ export default class Challenge3 extends Component {
             fileOpen: false,
             found: 0,
             solution: [],
-            points: 0,
         };
+        this.points = 0;
     }
     selectFile(e) {
         console.log(e);
@@ -122,14 +122,14 @@ export default class Challenge3 extends Component {
     }
 
     addPoints(points) {
-        let currentPoints = this.state.points;
-        this.setState({ points: currentPoints + points });
+        let currentPoints = this.points;
+        this.points = currentPoints + points;
         if (this.state.found === 4){
             const request = new XMLHttpRequest();
             request.open("POST", "https://0xs5mk4j9d.execute-api.eu-west-2.amazonaws.com/dev/challenge3");
             request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             request.send(JSON.stringify({"score": this.points}));
-            alert("Congratulations! You have completed the cryptography questlines! You got " + this.state.points + " points for challenge 3");
+            alert("Congratulations! You have completed the cryptography questlines! You got " + this.points + " points for challenge 3");
         }
     }
 
