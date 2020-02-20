@@ -160,7 +160,7 @@ export default class Challenge3 extends Component {
                         <div className="dropzone">
                             <h1>Incriminating files</h1>
                             <h3>{this.state.found} out of 4 files found</h3>
-                            <h3>{this.state.points} points</h3>
+                            <h3>{this.points} points</h3>
                             <ul>
                                 {this.state.solution.map((el, idx) => {
                                     return (<li>{el}</li>);
