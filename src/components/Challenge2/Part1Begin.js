@@ -18,7 +18,7 @@ export default class Part1Begin extends Component{
             integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"></link>
                 <h1>Sign in / Sign Up</h1>
                 <div className="container">
-                    This is the first part of challenge 1. Using the diagram provided,
+                    This is the first part of challenge 2. Using the diagram provided,
                     create a secure way to provide authentication for the users.
                     <br />
                     <div id="buttons">
