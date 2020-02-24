@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Challenge1.css"
+import { evaluation } from '../../package.json';
 
 export default class Challenge1 extends Component {
 
@@ -22,6 +23,8 @@ export default class Challenge1 extends Component {
         this.validate = this.validate.bind(this);
         this.answer = "MEET ME AT THE COFFEE SHOP. CRYPTO JEDI."
         this.points = 100;
+        this.attempts = 1;
+        this.startTime = new Date().getTime();
         document.title = "Challenge 1";
     }
 
@@ -115,13 +118,28 @@ export default class Challenge1 extends Component {
         }
         message = message.toUpperCase();
         if (message === this.answer){
+            const endTime = new Date().getTime();
             const request = new XMLHttpRequest();
             request.open("POST", "https://0xs5mk4j9d.execute-api.eu-west-2.amazonaws.com/dev/challenge1");
             request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             request.send(JSON.stringify({"score": this.points}));
+            console.log();
+            if (evaluation){
+                const evalRequest = new XMLHttpRequest();
+                evalRequest.open("POST", "https://0xs5mk4j9d.execute-api.eu-west-2.amazonaws.com/dev/evaluation/challenge1");
+                evalRequest.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                evalRequest.send(JSON.stringify({
+                    "score": this.points,
+                    "attempts": this.attempts,
+                    "timeTaken": endTime - this.startTime,
+                    "id": 0,
+                }));
+                console.log(evalRequest.response);
+            }
             alert("Correct! You got " + this.points + " points. You can close the challenge!");
         } else {
             alert("Incorrect! Please try again.");
+            this.attempts++;
             if (this.points > 0){
                 this.points -= 25;
             }
