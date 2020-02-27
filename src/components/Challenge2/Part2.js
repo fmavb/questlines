@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Part2.css';
+import { evaluation, id } from '../../../package.json';
 
 export default class Part2 extends Component {
     constructor(props) {
@@ -25,6 +26,9 @@ export default class Part2 extends Component {
         this.drawArrow2 = this.drawArrow2.bind(this);
         this.validate = this.validate.bind(this);
         this.points = 100;
+        this.attempts = 1;
+        this.startTime = new Date().getTime();
+        this.submissions = [];
         this.alg1 = {
             "none": "This does not result in a hashed message.",
             "md5": "MD5 results in a hashed message, however this algorithm is outdated, so this is not an optimal choice.",
@@ -185,12 +189,35 @@ export default class Part2 extends Component {
     }
 
     validate(){
+        this.submissions.push({
+            alg1: this.state.alg1,
+            alg2: this.state.alg2,
+            alg3: this.state.alg3,
+            key1: this.state.key1,
+            key2: this.state.key2,
+            key3: this.state.key3,
+        });
         if (this.state.alg1 === "sha" && this.state.alg2 === "aes" && this.state.alg3 === "rsa"
             && this.state.key1 === "nothing" && this.state.key2 === "random" && this.state.key3 === "rPublic"){
                 const request = new XMLHttpRequest();
                 request.open("POST", "https://0xs5mk4j9d.execute-api.eu-west-2.amazonaws.com/dev/part2");
                 request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                 request.send(JSON.stringify({"score": this.points}));
+                if (evaluation){
+                    const endTime = new Date().getTime();
+                    const evalRequest = new XMLHttpRequest();
+                    evalRequest.open("POST", "https://0xs5mk4j9d.execute-api.eu-west-2.amazonaws.com/dev/evaluation/challenge2/part2");
+                    evalRequest.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                    evalRequest.send(JSON.stringify({
+                        "part": 2,
+                        "attempts": this.attempts,
+                        "score": this.points,
+                        "timeTaken": endTime - this.startTime,
+                        "id": id,
+                        "submissions": this.submissions,
+                    }));
+                    console.log(evalRequest.response);
+                }
                 alert("Correct! You get " + this.points + " points");
                 this.props.history.push("/challenge2/part2/explanation");
             }
@@ -201,12 +228,14 @@ export default class Part2 extends Component {
             if (this.state.alg1 === "sha" && this.state.alg2 === "aes" && this.state.alg3 === "rsa"){
                 alert("The choice of algorithms are correct. However, " + this.key2[this.state.key2] + "\n" +
                     this.key3[this.state.key3]);
+                this.attempts++;
                 if (this.points > 0){
                     this.points -= 5;
                 }
             } else {
                 alert(this.alg1[this.state.alg1] + "\n" + this.alg2[this.state.alg2] + "\n" + 
                     this.alg3[this.state.alg3]);
+                this.attempts++;
                 if (this.points > 0){
                     this.points -= 25;
                 }

@@ -25,6 +25,7 @@
     "extends": "react-app"
   },
   "evaluation": true,
+  "id": 0,
   "browserslist": {
     "production": [
       ">0.2%",

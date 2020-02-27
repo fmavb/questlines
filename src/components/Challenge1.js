@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Challenge1.css"
-import { evaluation } from '../../package.json';
+import { evaluation, id } from '../../package.json';
 
 export default class Challenge1 extends Component {
 
@@ -25,6 +25,7 @@ export default class Challenge1 extends Component {
         this.points = 100;
         this.attempts = 1;
         this.startTime = new Date().getTime();
+        this.submissions = [];
         document.title = "Challenge 1";
     }
 
@@ -112,6 +113,7 @@ export default class Challenge1 extends Component {
 
     validate(){
         let message = this.state.message;
+        this.submissions.push(message);
         if (message === ""){
             alert("Please enter the decrypted message in the box provided");
             return;
@@ -123,7 +125,6 @@ export default class Challenge1 extends Component {
             request.open("POST", "https://0xs5mk4j9d.execute-api.eu-west-2.amazonaws.com/dev/challenge1");
             request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             request.send(JSON.stringify({"score": this.points}));
-            console.log();
             if (evaluation){
                 const evalRequest = new XMLHttpRequest();
                 evalRequest.open("POST", "https://0xs5mk4j9d.execute-api.eu-west-2.amazonaws.com/dev/evaluation/challenge1");
@@ -132,7 +133,8 @@ export default class Challenge1 extends Component {
                     "score": this.points,
                     "attempts": this.attempts,
                     "timeTaken": endTime - this.startTime,
-                    "id": 0,
+                    "id": id,
+                    "submissions": this.submissions,
                 }));
                 console.log(evalRequest.response);
             }

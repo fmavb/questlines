@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import './Part1.css';
+import { evaluation, id } from '../../../package.json';
+
 
 export default class Part1 extends Component{
     constructor(props){
@@ -12,6 +14,9 @@ export default class Part1 extends Component{
         this.state = {salt: "nothing", algorithm: "nothing"};
         document.title = "Challenge 2 - Part 1";
         this.points = 100;
+        this.startTime = new Date().getTime();
+        this.attempts = 1;
+        this.submissions = [];
     }
 
     selectSalt(e){
@@ -25,44 +30,66 @@ export default class Part1 extends Component{
     }
 
     validate(){
+        this.submissions.push({salt: this.state.salt, algorithm: this.state.algorithm});
         if (this.state.salt === "salt" && this.state.algorithm === "bcrypt"){
             const request = new XMLHttpRequest();
             request.open("POST", "https://0xs5mk4j9d.execute-api.eu-west-2.amazonaws.com/dev/part1");
             request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             request.send(JSON.stringify({"score": this.points}));
+            if (evaluation){
+                const endTime = new Date().getTime();
+                const evalRequest = new XMLHttpRequest();
+                evalRequest.open("POST", "https://0xs5mk4j9d.execute-api.eu-west-2.amazonaws.com/dev/evaluation/challenge2/part1");
+                evalRequest.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                evalRequest.send(JSON.stringify({
+                    "part": 1,
+                    "attempts": this.attempts,
+                    "score": this.points,
+                    "timeTaken": endTime - this.startTime,
+                    "id": id,
+                    "submissions": this.submissions,
+                }));
+                console.log(evalRequest.response);
+            }
             alert("This is the correct solution! You get " + this.points + " points!");
         } else if (this.state.algorithm === "des" || this.state.algorithm === "aes") {
             if (this.points > 0){
                 this.points -= 25;
             }
+            this.attempts++;
             alert("This solution is not correct. The problem with this solution is that symmetric cryptography is reversible. \
 Therefore, if an attacker steals the cipher from the database, he will be able to figure out the password by brute forcing all possible keys. You get 0 points");
         } else if (this.state.algorithm === "rsa"){
             if (this.points > 0){
                 this.points -= 25;
             }
+            this.attempts++;
             alert("This solution is not correct. This solution requires using a public and private key to encrypt and decrypt. \
 Also, public key cryptography requires the messages to be of fixed length");
         } else if (this.state.algorithm === "sha"){
             if (this.points > 0){
                 this.points -= 5;
             }
+            this.attempts++;
             alert("Hash algorithms is the correct choice here. However, bcrypt would be an even better solution because \
 it is a slow algorithm which makes brute forcing time consuming");
         } else if (this.state.algorithm === "md5"){
             if (this.points > 0){
                 this.points -= 5;
             }
+            this.attempts++;
             alert("Hash algorithms is the correct choice here. However, MD5 is considered to be unsafe and should not be used for hashing");
         } else if (this.state.salt === "nothing" && this.state.algorithm === "bcrypt"){
             if (this.points > 0){
                 this.points -= 5;
             }
+            this.attempts++;
             alert("The algorithm choice is correct here. However, if only the password is hashed, similar passwords will have the same hash allowing the attacker to see the user having the same password");
         } else if (this.state.salt === "username" && this.state.algorithm === "bcrypt"){
             if (this.points > 0){
                 this.points -= 5;
             }
+            this.attempts++;
             alert("The algorithm choice is correct here. However, using the username as a salt allows the attacker to predict the next hash if the user updates his password");
         }
         this.props.history.push('/challenge2/part1/explanation');

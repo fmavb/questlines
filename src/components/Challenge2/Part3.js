@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import './Part3.css';
+import { evaluation, id } from '../../../package.json';
+
 
 export default class Part3 extends Component {
     constructor(props){
@@ -22,6 +24,9 @@ export default class Part3 extends Component {
         this.selectKey1 = this.selectKey1.bind(this);
         this.validate = this.validate.bind(this);
         this.points = 100;
+        this.startTime = new Date().getTime();
+        this.attempts = 1;
+        this.submissions = [];
         this.alg1 = {
             "none": "This does not result in a decrypted message.",
             "md5": "MD5 does not result in a decrypted message.",
@@ -78,17 +83,39 @@ export default class Part3 extends Component {
     }
 
     validate(){
+        this.submissions.push({
+            key1: this.state.key1,
+            alg1: this.state.alg1,
+            alg2: this.state.alg2,
+        });
         if (this.state.key1 === "rPrivate" && this.state.alg1 === "rsa" && this.state.alg2 === "aes"){
             const request = new XMLHttpRequest();
             request.open("POST", "https://0xs5mk4j9d.execute-api.eu-west-2.amazonaws.com/dev/part3");
             request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             request.send(JSON.stringify({"score": this.points}));
+            if (evaluation){
+                const endTime = new Date().getTime();
+                const evalRequest = new XMLHttpRequest();
+                evalRequest.open("POST", "https://0xs5mk4j9d.execute-api.eu-west-2.amazonaws.com/dev/evaluation/challenge2/part2");
+                evalRequest.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                evalRequest.send(JSON.stringify({
+                    "part": 3,
+                    "attempts": this.attempts,
+                    "score": this.points,
+                    "timeTaken": endTime - this.startTime,
+                    "id": id,
+                }));
+                console.log(evalRequest.response);
+            }
             alert("Correct! You got " + this.points + " points");
             this.props.history.push('/challenge2/part3/explanation');
         } else {
-            if (this.state.alg1 === "sha" && this.state.alg2 === "aes" && this.state.alg3 === "rsa"){
-
+            this.attempts++;
+            if (this.state.alg2 === "aes" && this.state.alg1 === "rsa"){
+                this.points -= 5;
+                alert("The algorithm choice is correct. However, " + this.key1[this.state.key1]);
             } else {
+                this.points -= 25;
                 alert(this.alg1[this.state.alg1] + " " + this.alg2[this.state.alg2]);
             }
         }
