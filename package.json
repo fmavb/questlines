@@ -24,7 +24,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "evaluation": true,
+  "evaluation": false,
   "id": 0,
   "browserslist": {
     "production": [
