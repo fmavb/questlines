@@ -19,6 +19,7 @@ import Part3Explanation from './components/Challenge2/Part3Explanation';
 import Part1Begin from './components/Challenge2/Part1Begin';
 import Part2Begin from './components/Challenge2/Part2Begin';
 import Part3Begin from './components/Challenge2/Part3Begin';
+import Explanation from './components/Challenge1/Explanation';
 
 export default class App extends Component {
 
@@ -37,6 +38,7 @@ export default class App extends Component {
           <Route path="/challenge2/part3" component={Part3} />
           <Route path="/challenge1" exact component={Email} />
           <Route path="/challenge1/decryptor" component={Challenge1} />
+          <Route path="/challenge1/explanation" component={Explanation} />
           <Route path="/challenge3" component={Challenge3} />
           <Route path="/">
             <Home />

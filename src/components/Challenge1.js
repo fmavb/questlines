@@ -138,7 +138,8 @@ export default class Challenge1 extends Component {
                 }));
                 console.log(evalRequest.response);
             }
-            alert("Correct! You got " + this.points + " points. You can close the challenge!");
+            alert("Correct! You got " + this.points + " points.");
+            this.props.history.push("/challenge1/explanation");
         } else {
             alert("Incorrect! Please try again.");
             this.attempts++;
