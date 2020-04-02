@@ -33,13 +33,13 @@ export default class Part1 extends Component{
         this.submissions.push({salt: this.state.salt, algorithm: this.state.algorithm});
         if (this.state.salt === "salt" && this.state.algorithm === "bcrypt"){
             const request = new XMLHttpRequest();
-            request.open("POST", "https://0xs5mk4j9d.execute-api.eu-west-2.amazonaws.com/dev/part1");
+            request.open("POST", "https://3m804nvp5i.execute-api.eu-west-2.amazonaws.com/dev/part1");
             request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             request.send(JSON.stringify({"score": this.points}));
             if (evaluation){
                 const endTime = new Date().getTime();
                 const evalRequest = new XMLHttpRequest();
-                evalRequest.open("POST", "https://0xs5mk4j9d.execute-api.eu-west-2.amazonaws.com/dev/evaluation/challenge2/part1");
+                evalRequest.open("POST", "https://3m804nvp5i.execute-api.eu-west-2.amazonaws.com/dev/evaluation/challenge2/part1");
                 evalRequest.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                 evalRequest.send(JSON.stringify({
                     "part": 1,

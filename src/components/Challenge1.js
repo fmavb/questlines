@@ -122,12 +122,12 @@ export default class Challenge1 extends Component {
         if (message === this.answer){
             const endTime = new Date().getTime();
             const request = new XMLHttpRequest();
-            request.open("POST", "https://0xs5mk4j9d.execute-api.eu-west-2.amazonaws.com/dev/challenge1");
+            request.open("POST", "https://3m804nvp5i.execute-api.eu-west-2.amazonaws.com/dev/challenge1");
             request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             request.send(JSON.stringify({"score": this.points}));
             if (evaluation){
                 const evalRequest = new XMLHttpRequest();
-                evalRequest.open("POST", "https://0xs5mk4j9d.execute-api.eu-west-2.amazonaws.com/dev/evaluation/challenge1");
+                evalRequest.open("POST", "https://3m804nvp5i.execute-api.eu-west-2.amazonaws.com/dev/evaluation/challenge1");
                 evalRequest.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                 evalRequest.send(JSON.stringify({
                     "score": this.points,
